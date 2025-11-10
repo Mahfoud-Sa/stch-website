@@ -11,7 +11,7 @@ function Header() {
 
           {/* ---------- Logo / Title ---------- */}
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800">
-            Star Technology Website
+            متجر نجم التقنية
           </h2>
 
           {/* ---------- Right Side (Search + Cart Icon) ---------- */}
@@ -21,7 +21,7 @@ function Header() {
             <div className="hidden sm:block w-full max-w-xs">
               <input
                 type="text"
-                placeholder="Search Product..."
+                placeholder="البحث عن منتجات"
                 className="w-full bg-gray-200 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
@@ -33,7 +33,7 @@ function Header() {
 
               {/* Item count badge */}
               <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full">
-                3
+                0
               </span>
             </div>
 
