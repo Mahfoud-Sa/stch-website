@@ -8,36 +8,39 @@ function Header() {
 
         {/* ========== MAIN HEADER ROW ========== */}
         <div className="flex items-center justify-between h-16">
-
-          {/* ---------- Logo / Title ---------- */}
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800">
-            متجر نجم التقنية
-          </h2>
-
-          {/* ---------- Right Side (Search + Cart Icon) ---------- */}
+ {/* ---------- Right Side (Search + Cart Icon) ---------- */}
           <div className="flex items-center gap-4">
+{/* ---------- Basket Icon ---------- */}
+            {/* Replace "3" with your cart item count state later */}
+            <div className="relative cursor-pointer">
+              {/* Item count badge */}
+              <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full">
+                0
+              </span>
+             
+              <ShoppingCart className="w-7 h-7 text-gray-700" />
 
+              
+            </div>
             {/* ---------- Search Bar (Hidden on mobile) ---------- */}
             <div className="hidden sm:block w-full max-w-xs">
               <input
+              
                 type="text"
                 placeholder="البحث عن منتجات"
                 className="w-full bg-gray-200 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
 
-            {/* ---------- Basket Icon ---------- */}
-            {/* Replace "3" with your cart item count state later */}
-            <div className="relative cursor-pointer">
-              <ShoppingCart className="w-7 h-7 text-gray-700" />
-
-              {/* Item count badge */}
-              <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full">
-                0
-              </span>
-            </div>
+            
 
           </div>
+          {/* ---------- Logo / Title ---------- */}
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800">
+            متجر نجم التقنية
+          </h2>
+
+         
         </div>
 
         {/* ========== Mobile Search Bar ========== */}
