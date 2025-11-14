@@ -197,7 +197,7 @@ export default function FilterComponent({ onFilterChange }) {
           fontSize: "14px",
         }}
       >
-        Clear All Filters
+        اعاده ضبط
       </button>
     </div>
   );
