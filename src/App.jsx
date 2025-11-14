@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Header from "./components/Header.jsx";
 import PageDivider from "./components/PageDivider.jsx";
 import FilterComponent from "./components/FilterComponent.jsx";
-import ProductGrid from "./components/productGrid.jsx";
+import ProductGrid from "./components/ProductGrid.jsx";
 function App() {
  
   const [filteredProducts, setFilteredProducts] = useState([]);
