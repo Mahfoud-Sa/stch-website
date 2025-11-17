@@ -5,18 +5,20 @@ function ProductCard({ product }) {
 
     const [expanded, setExpanded] = useState(false);
 
-    // Limit for description (characters)
     const MAX_LENGTH = 120;
 
     const hasDescription = product.description && product.description.trim().length > 0;
     const isLong = hasDescription && product.description.length > MAX_LENGTH;
-    
+
     const displayText = expanded
         ? product.description
-        : hasDescription ? product.description.slice(0, MAX_LENGTH) + (isLong ? "..." : "") : "";
+        : hasDescription
+            ? product.description.slice(0, MAX_LENGTH) + (isLong ? "..." : "")
+            : "";
 
     return (
         <article
+            dir="rtl"
             style={{
                 border: "1px solid #e5e7eb",
                 borderRadius: 8,
@@ -25,6 +27,7 @@ function ProductCard({ product }) {
                 display: "flex",
                 flexDirection: "column",
                 gap: 8,
+                textAlign: "right",
             }}
             aria-labelledby={`prod-${product.id}-title`}
         >
@@ -37,21 +40,30 @@ function ProductCard({ product }) {
                 />
             )}
 
-            {/* ✅ Laptop Name - Always show */}
-            <h3 id={`prod-${product.id}-title`} style={{ margin: 0, fontSize: 16 }}>
+            {/* ✅ Laptop Name */}
+            <h3
+                id={`prod-${product.id}-title`}
+                style={{ margin: 0, fontSize: 16, fontWeight: "600" }}
+            >
                 {product.name}
             </h3>
 
-            {/* ✅ Starts at Price - Always show if price exists */}
+            {/* ✅ Starts at Price */}
             {product.price != null && (
-                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                <div
+                    style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                    }}
+                >
                     <strong style={{ color: "#111827", fontSize: 14 }}>
-                        Starts at {product.price}
+                        يبدأ من {product.price} ريال سعودي
                     </strong>
                 </div>
             )}
 
-            {/* ✅ Description - Always show if description exists */}
+            {/* ✅ Description */}
             {hasDescription && (
                 <div style={{ margin: 0, color: "#6b7280", fontSize: 13 }}>
                     <p style={{ margin: 0 }}>
@@ -69,10 +81,11 @@ function ProductCard({ product }) {
                                 cursor: "pointer",
                                 padding: 0,
                                 fontSize: 13,
-                                marginTop: 4
+                                marginTop: 4,
+                                textAlign: "right",
                             }}
                         >
-                            {expanded ? "Show less" : "Show more"}
+                            {expanded ? "عرض أقل" : "عرض المزيد"}
                         </button>
                     )}
                 </div>

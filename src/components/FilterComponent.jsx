@@ -1,14 +1,11 @@
-// src/components/FilterComponent.jsx
 import React, { useState } from "react";
 
 export default function FilterComponent({ onFilterChange }) {
   const [filters, setFilters] = useState({
     priceRange: [0, 5000],
-    sellers: [],
-    availability: false,
-    maxResolution: "",
-    processorCount: [],
-    newArrivals: "",
+    company: "",
+    processor: "",
+    features: [],
   });
 
   const handleFilterChange = (filterType, value) => {
@@ -17,27 +14,27 @@ export default function FilterComponent({ onFilterChange }) {
     onFilterChange(newFilters);
   };
 
-  const sellerOptions = [
-    "Desertcart SA",
-    "Amazon US",
-    "Amazon Global Store"
+  // ================================
+  // Options
+  // ================================
+  const companyOptions = [
+    "Dell",
+    "HP",
+    "Lenovo",
+    "Toshiba",
+    "Asus",
+    "Acer",
+    "MSI",
+    "Samsung",
   ];
 
-  const resolutionOptions = [
-    "1024x600",
-    "1280x720",
-    "1280x800",
-    "1366x768",
-    "1440x900",
-    "1536x1024",
-    "1600x900",
-    "1920x1080"
-  ];
+  const processorOptions = ["Core i3", "Core i5", "Core i7", "Core i9"];
 
-  const processorOptions = [32, 28, 24, 20, 16, 14, 12, 8, 6, 4];
+  const featureOptions = ["شاشة لمس", "قلم", "كيبورد مضيء", "بصمة"];
 
   return (
     <div
+      dir="rtl"
       style={{
         width: "25%",
         backgroundColor: "#f9fafb",
@@ -46,91 +43,52 @@ export default function FilterComponent({ onFilterChange }) {
         border: "1px solid #e5e7eb",
       }}
     >
-      <h3 style={{ margin: "0 0 20px 0", color: "#111827" }}>Filters</h3>
+      <h3 style={{ margin: "0 0 20px 0", color: "#111827" }}>الفلاتر</h3>
 
-      {/* Price Range Slider */}
-      <div style={{ marginBottom: "24px" }}>
-        <h4 style={{ margin: "0 0 12px 0", fontSize: "14px", fontWeight: "600" }}>
+      {/* ======================================
           Price Range
+      ====================================== */}
+      <div style={{ marginBottom: "24px" }}>
+        <h4 style={{ marginBottom: "12px", fontSize: "14px", fontWeight: "600" }}>
+          نطاق السعر
         </h4>
+
         <input
           type="range"
           min="0"
           max="5000"
           value={filters.priceRange[1]}
-          onChange={(e) => handleFilterChange("priceRange", [0, parseInt(e.target.value)])}
+          onChange={(e) =>
+            handleFilterChange("priceRange", [0, parseInt(e.target.value)])
+          }
           style={{ width: "100%" }}
         />
-        <div style={{ display: "flex", justifyContent: "space-between", marginTop: "8px" }}>
-          <span style={{ fontSize: "12px", color: "#6b7280" }}>SAR 0</span>
-          <span style={{ fontSize: "12px", color: "#6b7280" }}>SAR {filters.priceRange[1]}</span>
+
+        <div
+          style={{
+            marginTop: "8px",
+            display: "flex",
+            justifyContent: "space-between",
+          }}
+        >
+          <span style={{ fontSize: "12px", color: "#6b7280" }}>0 ريال</span>
+          <span style={{ fontSize: "12px", color: "#6b7280" }}>
+            {filters.priceRange[1]} ريال
+          </span>
         </div>
       </div>
 
-      {/* Seller Filter */}
+      {/* ======================================
+          Company (Dropdown)
+      ====================================== */}
       <div style={{ marginBottom: "24px" }}>
-        <h4 style={{ margin: "0 0 12px 0", fontSize: "14px", fontWeight: "600" }}>
-          Seller
+        <h4 style={{ marginBottom: "12px", fontSize: "14px", fontWeight: "600" }}>
+          الشركة المصنعة
         </h4>
-        {sellerOptions.map((seller) => (
-          <div key={seller} style={{ marginBottom: "8px" }}>
-            <label style={{ display: "flex", alignItems: "center", gap: "8px", fontSize: "14px" }}>
-              <input
-                type="checkbox"
-                checked={filters.sellers.includes(seller)}
-                onChange={(e) => {
-                  const newSellers = e.target.checked
-                    ? [...filters.sellers, seller]
-                    : filters.sellers.filter(s => s !== seller);
-                  handleFilterChange("sellers", newSellers);
-                }}
-              />
-              {seller}
-            </label>
-          </div>
-        ))}
-      </div>
 
-      {/* Availability */}
-      <div style={{ marginBottom: "24px" }}>
-        <label style={{ display: "flex", alignItems: "center", gap: "8px", fontSize: "14px" }}>
-          <input
-            type="checkbox"
-            checked={filters.availability}
-            onChange={(e) => handleFilterChange("availability", e.target.checked)}
-          />
-          Include Out of Stock
-        </label>
-      </div>
-
-      {/* New Arrivals */}
-      <div style={{ marginBottom: "24px" }}>
-        <h4 style={{ margin: "0 0 12px 0", fontSize: "14px", fontWeight: "600" }}>
-          New Arrivals
-        </h4>
-        <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
-          {["Last 30 days", "Last 90 days"].map((option) => (
-            <label key={option} style={{ display: "flex", alignItems: "center", gap: "8px", fontSize: "14px" }}>
-              <input
-                type="radio"
-                name="newArrivals"
-                checked={filters.newArrivals === option}
-                onChange={() => handleFilterChange("newArrivals", option)}
-              />
-              {option}
-            </label>
-          ))}
-        </div>
-      </div>
-
-      {/* Max Resolution */}
-      <div style={{ marginBottom: "24px" }}>
-        <h4 style={{ margin: "0 0 12px 0", fontSize: "14px", fontWeight: "600" }}>
-          Max Resolution
-        </h4>
         <select
-          value={filters.maxResolution}
-          onChange={(e) => handleFilterChange("maxResolution", e.target.value)}
+          value={filters.company}
+          onChange={(e) => handleFilterChange("company", e.target.value)}
           style={{
             width: "100%",
             padding: "8px",
@@ -139,52 +97,93 @@ export default function FilterComponent({ onFilterChange }) {
             fontSize: "14px",
           }}
         >
-          <option value="">Select Resolution</option>
-          {resolutionOptions.map((resolution) => (
-            <option key={resolution} value={resolution}>
-              {resolution}
+          <option value="">اختر شركة</option>
+          {companyOptions.map((company) => (
+            <option key={company} value={company}>
+              {company}
             </option>
           ))}
         </select>
       </div>
 
-      {/* Processor Count */}
+      {/* ======================================
+          Processor (Radio Buttons)
+      ====================================== */}
       <div style={{ marginBottom: "24px" }}>
-        <h4 style={{ margin: "0 0 12px 0", fontSize: "14px", fontWeight: "600" }}>
-          Processor Count
+        <h4 style={{ marginBottom: "12px", fontSize: "14px", fontWeight: "600" }}>
+          المعالج
         </h4>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "8px" }}>
-          {processorOptions.map((count) => (
-            <label key={count} style={{ display: "flex", alignItems: "center", gap: "4px", fontSize: "12px" }}>
-              <input
-                type="checkbox"
-                checked={filters.processorCount.includes(count)}
-                onChange={(e) => {
-                  const newProcessors = e.target.checked
-                    ? [...filters.processorCount, count]
-                    : filters.processorCount.filter(p => p !== count);
-                  handleFilterChange("processorCount", newProcessors);
-                }}
-              />
-              {count}
-            </label>
-          ))}
-        </div>
+
+        {processorOptions.map((cpu) => (
+          <label
+            key={cpu}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "8px",
+              marginBottom: "8px",
+              fontSize: "14px",
+            }}
+          >
+            <input
+              type="radio"
+              name="processor"
+              checked={filters.processor === cpu}
+              onChange={() => handleFilterChange("processor", cpu)}
+            />
+            {cpu}
+          </label>
+        ))}
       </div>
 
-      {/* Clear Filters Button */}
+      {/* ======================================
+          Features (Checkboxes)
+      ====================================== */}
+      <div style={{ marginBottom: "24px" }}>
+        <h4 style={{ marginBottom: "12px", fontSize: "14px", fontWeight: "600" }}>
+          الميزات
+        </h4>
+
+        {featureOptions.map((feature) => (
+          <label
+            key={feature}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "8px",
+              marginBottom: "8px",
+              fontSize: "14px",
+            }}
+          >
+            <input
+              type="checkbox"
+              checked={filters.features.includes(feature)}
+              onChange={(e) => {
+                const updated = e.target.checked
+                  ? [...filters.features, feature]
+                  : filters.features.filter((f) => f !== feature);
+
+                handleFilterChange("features", updated);
+              }}
+            />
+            {feature}
+          </label>
+        ))}
+      </div>
+
+      {/* ======================================
+          Reset Button
+      ====================================== */}
       <button
         onClick={() => {
-          const resetFilters = {
+          const reset = {
             priceRange: [0, 5000],
-            sellers: [],
-            availability: false,
-            maxResolution: "",
-            processorCount: [],
-            newArrivals: "",
+            company: "",
+            processor: "",
+            features: [],
           };
-          setFilters(resetFilters);
-          onFilterChange(resetFilters);
+          setFilters(reset);
+          onFilterChange(reset);
         }}
         style={{
           width: "100%",
@@ -197,7 +196,7 @@ export default function FilterComponent({ onFilterChange }) {
           fontSize: "14px",
         }}
       >
-        اعاده ضبط
+        إعادة ضبط الفلاتر
       </button>
     </div>
   );
