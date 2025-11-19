@@ -16,6 +16,23 @@ function ProductCard({ product }) {
             ? product.description.slice(0, MAX_LENGTH) + (isLong ? "..." : "")
             : "";
 
+    // ------------------------------
+    // ✅ WhatsApp Message
+    // ------------------------------
+    const phone = "736193873"; // WhatsApp number
+    const fullMessage = `
+مرحبا، أريد الاستفسار عن المنتج التالي:
+
+الاسم: ${product.name}
+الوصف: ${product.description || "لا يوجد وصف"}
+السعر: ${product.price != null ? product.price + " ريال سعودي" : "غير متوفر"}
+
+شكراً لكم.
+    `;
+
+    const encodedMessage = encodeURIComponent(fullMessage);
+    const whatsappUrl = `https://wa.me/${phone}?text=${encodedMessage}`;
+
     return (
         <article
             dir="rtl"
@@ -31,7 +48,7 @@ function ProductCard({ product }) {
             }}
             aria-labelledby={`prod-${product.id}-title`}
         >
-            {/* ✅ Laptop Image */}
+            {/* Laptop Image */}
             {product.image && (
                 <img
                     src={product.image}
@@ -40,7 +57,7 @@ function ProductCard({ product }) {
                 />
             )}
 
-            {/* ✅ Laptop Name */}
+            {/* Laptop Name */}
             <h3
                 id={`prod-${product.id}-title`}
                 style={{ margin: 0, fontSize: 16, fontWeight: "600" }}
@@ -48,7 +65,7 @@ function ProductCard({ product }) {
                 {product.name}
             </h3>
 
-            {/* ✅ Starts at Price */}
+            {/* Starts at Price */}
             {product.price != null && (
                 <div
                     style={{
@@ -63,7 +80,7 @@ function ProductCard({ product }) {
                 </div>
             )}
 
-            {/* ✅ Description */}
+            {/* Description */}
             {hasDescription && (
                 <div style={{ margin: 0, color: "#6b7280", fontSize: 13 }}>
                     <p style={{ margin: 0 }}>
@@ -90,6 +107,29 @@ function ProductCard({ product }) {
                     )}
                 </div>
             )}
+
+            {/* ------------------------------ */}
+            {/* ✅ WhatsApp Button */}
+            {/* ------------------------------ */}
+            <a
+                href={whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                    marginTop: 10,
+                    background: "#25D366",
+                    color: "#fff",
+                    padding: "8px 12px",
+                    borderRadius: 6,
+                    textAlign: "center",
+                    fontSize: 14,
+                    fontWeight: "600",
+                    textDecoration: "none",
+                    cursor: "pointer",
+                }}
+            >
+                تواصل عبر واتساب
+            </a>
         </article>
     );
 }
