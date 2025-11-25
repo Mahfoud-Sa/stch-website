@@ -10,6 +10,7 @@ import { getAllProductsFromContentful } from "./api/productsApi.js";
 function App() {
   const [allProducts, setAllProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
 
   // Fetch products once on app load
   useEffect(() => {
@@ -41,9 +42,12 @@ function App() {
 
   return (
     <div>
-      <Header />
+      <Header 
+        isFilterOpen={isFilterOpen} 
+        setIsFilterOpen={setIsFilterOpen} 
+      />
       <PageDivider>
-        <div style={{ width: "75%" }}>
+        <div className="w-full lg:w-3/4">
           <ProductGrid
             title="اجهزة الكمبيوترات المتوفره لدينا"
             description="تفقد مجموعتنا الرائعة"
@@ -51,7 +55,11 @@ function App() {
           />
         </div>
 
-        <FilterComponent onFilterChange={handleFilterChange} />
+        <FilterComponent 
+          onFilterChange={handleFilterChange}
+          isOpen={isFilterOpen}
+          onClose={() => setIsFilterOpen(false)}
+        />
       </PageDivider>
     </div>
   );

@@ -4,8 +4,8 @@ import React from "react";
 export default function PageDivider({ children }) {
   return (
     <div
+      className="flex flex-wrap lg:flex-nowrap"
       style={{
-        display: "flex",
         gap: "20px",
         padding: "20px",
         maxWidth: "1200px",

@@ -33,7 +33,7 @@ export default function ProductGrid({ title = "Products", description = "", prod
             <div
                 style={{
                     display: "grid",
-                    gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))",
+                    gridTemplateColumns: "repeat(auto-fill, minmax(180px, 1fr))",
                     gap: 16,
                 }}
             >

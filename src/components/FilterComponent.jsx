@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export default function FilterComponent({ onFilterChange }) {
+export default function FilterComponent({ onFilterChange, isOpen, onClose }) {
   const [filters, setFilters] = useState({
     priceRange: [0, 5000],
     company: "",
@@ -33,17 +33,64 @@ export default function FilterComponent({ onFilterChange }) {
   const featureOptions = ["شاشة لمس", "قلم", "كيبورد مضيء", "بصمة"];
 
   return (
-    <div
-      dir="rtl"
-      style={{
-        width: "25%",
-        backgroundColor: "#f9fafb",
-        padding: "20px",
-        borderRadius: "8px",
-        border: "1px solid #e5e7eb",
-      }}
-    >
-      <h3 style={{ margin: "0 0 20px 0", color: "#111827" }}>الفلاتر</h3>
+    <>
+      {/* ========== Backdrop Overlay (Mobile Only) ========== */}
+      {isOpen && (
+        <div
+          className="lg:hidden fixed inset-0 bg-black/50 z-40"
+          onClick={onClose}
+          style={{ transition: "opacity 0.3s ease-in-out" }}
+        />
+      )}
+
+      {/* ========== Filter Panel ========== */}
+      <div
+        dir="rtl"
+        className={`
+          w-full lg:w-1/4
+          lg:static lg:translate-x-0
+          fixed top-0 right-0 h-full
+          transform transition-transform duration-300 ease-in-out
+          ${isOpen ? 'translate-x-0' : 'translate-x-full lg:translate-x-0'}
+          z-50 lg:z-auto
+          overflow-y-auto
+        `}
+        style={{
+          backgroundColor: "#f9fafb",
+          padding: "20px",
+          borderRadius: "8px",
+          border: "1px solid #e5e7eb",
+        }}
+      >
+        {/* ========== Header with Close Button (Mobile Only) ========== */}
+        <div className="flex items-center justify-between mb-4 lg:hidden">
+          <h3 style={{ margin: 0, color: "#111827" }}>الفلاتر</h3>
+          <button
+            onClick={onClose}
+            className="text-gray-600 hover:text-gray-900 p-2"
+            aria-label="Close filters"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
+        </div>
+
+        {/* ========== Title (Desktop Only) ========== */}
+        <h3 className="hidden lg:block" style={{ margin: "0 0 20px 0", color: "#111827" }}>
+          الفلاتر
+        </h3>
 
       {/* ======================================
           Price Range
@@ -199,5 +246,6 @@ export default function FilterComponent({ onFilterChange }) {
         إعادة ضبط الفلاتر
       </button>
     </div>
+    </>
   );
 }
