@@ -47,7 +47,7 @@ export default function FilterComponent({ onFilterChange, isOpen, onClose }) {
       <div
         dir="rtl"
         className={`
-          w-full lg:w-1/4
+          w-80 max-w-[85vw] lg:w-1/4
           lg:static lg:translate-x-0
           fixed top-0 right-0 h-full
           transform transition-transform duration-300 ease-in-out
