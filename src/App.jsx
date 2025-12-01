@@ -4,6 +4,7 @@ import Header from "./components/Header.jsx";
 import PageDivider from "./components/PageDivider.jsx";
 import FilterComponent from "./components/FilterComponent.jsx";
 import ProductGrid from "./components/ProductGrid.jsx";
+import Footer from "./components/Footer.jsx";
 
 import { getAllProductsFromContentful } from "./api/productsApi.js";
 
@@ -61,6 +62,7 @@ function App() {
           onClose={() => setIsFilterOpen(false)}
         />
       </PageDivider>
+      <Footer />
     </div>
   );
 }
